@@ -1,0 +1,54 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+})->name("welcome");
+
+Auth::routes();
+
+Route::get('/home', function(){return redirect()->route("welcome");})->name("home");
+Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
+            ->name('events.index');
+Route::get('/events/me', [App\Http\Controllers\EventController::class, 'myevents'])
+            ->name('events.myevents')
+            ->middleware('auth');
+Route::get('/events/attend/{event}', [App\Http\Controllers\EventController::class, 'attendShow'])
+            ->name('events.attendShow');
+Route::post('/events/attend/{event}', [App\Http\Controllers\EventController::class, 'attend'])
+            ->name('events.attend')
+            ->middleware('auth');
+Route::get('/events/create', [App\Http\Controllers\EventController::class, 'create'])
+            ->name('events.create')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/events/create', [App\Http\Controllers\EventController::class, 'store'])
+            ->name('events.store')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/events/{id}', [App\Http\Controllers\EventController::class, 'show'])
+            ->name('events.show');
+
+
+Route::get('/user/data/show', [App\Http\Controllers\UserController::class, 'showdata'])
+            ->name('userdata.showdata')
+            ->middleware('auth');
+Route::get('/user/data/delete', [App\Http\Controllers\UserController::class, 'deletedataShow'])
+            ->name('userdata.deletedata')
+            ->middleware('auth');
+Route::post('/user/data/delete', [App\Http\Controllers\UserController::class, 'deletedata'])
+            ->name('userdata.delete')
+            ->middleware('auth');
+
+Route::get('/admin', function(){return "Admin";})->name("admin.index")->middleware(['auth', 'isAdmin']);
+
