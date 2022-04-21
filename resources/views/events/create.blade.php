@@ -25,9 +25,13 @@
                 <label for="end_date">Enddatum</label> 
                 <input id="end_date" name="end_date" placeholder="tt/mm/jjjj" type="text" class="form-control" required="required">
             </div>
-            @csrf
             <div class="form-group">
-                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                <label for="limit">Max. Teilnehmer</label> 
+                <input id="limit" name="limit" placeholder="0" type="text" class="form-control">
+            </div>
+            @csrf
+            <div class="form-group mt-1">
+                <button name="submit" type="submit" class="btn btn-primary">Erstellen</button>
             </div>
             </form>
         </div>

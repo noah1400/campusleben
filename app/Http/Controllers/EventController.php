@@ -58,6 +58,13 @@ class EventController extends Controller
         $event->location = $request->location;
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
+        if($request->has('limit')){
+            if($request->limit > 0){
+                $event->limit = $request->limit;
+            }else{
+                $event->limit = 0;
+            }
+        }
         $event->save();
 
         return redirect()->route('events.show', $event->id);

@@ -22,12 +22,16 @@
                             <h3>{{ $event->name }}</h3>
                         </div>
                         <div class="card-body">
+                            @if ($event->users->count() >= $event->limit && $event->limit != 0)
+                                <p>Die maximale Teilnehmerzahl wurde erreicht.</p>
+                            @else
                             <p>Möchtest du dich für dieses Event anmelden?</p>
                             <form action="{{ route('events.attend', ['event'=>$event]) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Ja</button>
                                 <a href="{{ route('events.index') }}" class="btn btn-secondary">Nein</a>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>

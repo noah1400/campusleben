@@ -13,9 +13,11 @@
                     <p>Start: {{ $event->start_date }}</p>
                     <p>Ende: {{ $event->end_date }}</p>
                     <p>Beschreibung: <pre>{{ $event->description }}</pre></p>
-                    <p>Voranmeldungen: {{ $event->users->count() }}</p>
-                    <p><a href="{{ route('events.attendShow',['event'=>$event->id])}}">
-                        <button class="btn btn-primary">Anmelden</button>
+                    <p>Voranmeldungen: {{ $event->users->count() }} Max.: {{ $event->limit == 0 ? 'unbegrenzt' : $event->limit}}</p>
+                    <p><a href="{{ route('events.attendShow',['event'=>$event->id])}}" 
+                          class="btn btn-primary{{ $event->users->count() >= $event->limit && $event->limit != 0 ? ' disabled' : ''}}"
+                          {{ $event->users->count() >= $event->limit && $event->limit != 0 ? ' aria-disabled="true"' : ''}}>
+                            Anmelden
                     </a></p>
                 </div>
             </div>
