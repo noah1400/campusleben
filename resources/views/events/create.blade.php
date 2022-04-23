@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="POST" action="{{ route('events.store') }}">
+            <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label> 
                 <input id="name" name="name" placeholder="z.B. Halloween Party" type="text" required="required" class="form-control">
@@ -28,6 +28,18 @@
             <div class="form-group">
                 <label for="limit">Max. Teilnehmer</label> 
                 <input id="limit" name="limit" placeholder="0" type="text" class="form-control">
+            </div>
+            <div class="form-check">
+                <label for="pre_registration_enabled" class="form-check-label">Vor-Anmeldung aktivieren</label>
+                <input id="pre_registration_enabled" name="pre_registration_enabled" type="checkbox" class="form-check-input" value="" checked>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label" for="team_registration_enabled">Team-Anmeldung aktivieren (Noch nicht unterstützt)</label>
+                <input id="team_registration_enabled" name="team_registration_enabled" type="checkbox" class="form-check-input" disabled>
+            </div>
+            <div class="form-group">
+                <label  for="preview_image">Vorschaubild</label>
+                <input type="file" class="form-control @error('preview_image') is-invalid @enderror" id="preview_image" name="preview_image">
             </div>
             @csrf
             <div class="form-group mt-1">

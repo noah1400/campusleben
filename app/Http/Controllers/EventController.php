@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -50,6 +51,7 @@ class EventController extends Controller
             'location' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+            'preview_image' => 'image|mimes:jpg,png,jpeg,gif,svg|nullable|max:1999'
         ]);
 
         $event = new Event();
@@ -58,6 +60,18 @@ class EventController extends Controller
         $event->location = $request->location;
         $event->start_date = $request->start_date;
         $event->end_date = $request->end_date;
+        if($request->has('pre_registration_enabled')){
+            $event->pre_registration_enabled = true;
+            if($request->has('team_registration_enabled')){
+                $event->team_registration_enabled = true;
+            }else{
+                $event->team_registration_enabled = false;
+            }
+        }else{
+            $event->pre_registration_enabled = false;
+            $event->team_registration_enabled = false;
+        }
+        
         if($request->has('limit')){
             if($request->limit > 0){
                 $event->limit = $request->limit;
@@ -65,6 +79,91 @@ class EventController extends Controller
                 $event->limit = 0;
             }
         }
+
+        if (request()->hasFile('preview_image')) {
+            $imageURL = request()->file('preview_image')->store('public/events');
+
+            $parameters['image_url'] = substr($imageURL, 7);
+
+            Image::configure(array('driver' => 'gd'));
+
+            Image::make(storage_path('app/public/' . $parameters['image_url']))
+                ->heighten(300)
+                ->save(storage_path('app/public/' . $parameters['image_url']));
+
+            $event->preview_image = $parameters['image_url'];
+
+        }
+
+        $event->save();
+
+        return redirect()->route('events.show', $event->id);
+    }
+
+    public function edit($id){
+        $event = Event::findOrFail($id);
+        return view('events.edit', compact('event'));
+    }
+
+    public function update(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'preview_image' => 'image|nullable|max:1999'
+        ]);
+        $event = Event::findOrFail($id);
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->start_date = $request->start_date;
+        $event->end_date = $request->end_date;
+        if($request->has('pre_registration_enabled')){
+            $event->pre_registration_enabled = true;
+            if($request->has('team_registration_enabled')){
+                $event->team_registration_enabled = true;
+            }else{
+                $event->team_registration_enabled = false;
+            }
+        }else{
+            $event->pre_registration_enabled = false;
+            $event->team_registration_enabled = false;
+        }
+        if($request->has('limit')){
+            if($request->limit > 0){
+                $event->limit = $request->limit;
+            }else{
+                $event->limit = 0;
+            }
+        }
+
+        if (request()->hasFile('preview_image')) {
+            $imageURL = request()->file('preview_image')->store('public/events');
+
+            $parameters['image_url'] = substr($imageURL, 7);
+
+            Image::configure(array('driver' => 'gd'));
+
+            Image::make(storage_path('app/public/' . $parameters['image_url']))
+                ->heighten(300)
+                ->save(storage_path('app/public/' . $parameters['image_url']));
+
+            $previousImage = $event->preview_image;
+            //delete previous image
+            if($previousImage != null){
+                if(file_exists(storage_path('app/public/' . $previousImage))){
+                    unlink(storage_path('app/public/' . $previousImage));
+                }
+            }
+
+            $event->preview_image = $parameters['image_url'];
+
+        }
+
+
+
         $event->save();
 
         return redirect()->route('events.show', $event->id);
@@ -96,5 +195,27 @@ class EventController extends Controller
     public function show(int $id){
         $event = Event::findOrFail($id);
         return view('events.show', compact('event'));
+    }
+
+    public function close(int $id)
+    {
+        $event = Event::findOrFail($id);
+        $event->pre_registration_enabled = false;
+        $event->save();
+        return redirect()->route('events.show', ['id' => $id]);
+    }
+
+    public function open(int $id)
+    {
+        $event = Event::findOrFail($id);
+        $event->pre_registration_enabled = true;
+        $event->save();
+        return redirect()->route('events.show', ['id' => $id]);
+    }
+
+    public function delete(int $id){
+        $event = Event::findOrFail($id);
+        $event->delete();
+        return redirect()->route('events.index');
     }
 }

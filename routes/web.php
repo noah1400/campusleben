@@ -36,6 +36,21 @@ Route::get('/events/create', [App\Http\Controllers\EventController::class, 'crea
 Route::post('/events/create', [App\Http\Controllers\EventController::class, 'store'])
             ->name('events.store')
             ->middleware(['auth', 'isAdmin']);
+Route::post('/events/close/{id}', [App\Http\Controllers\EventController::class, 'close'])
+            ->name('events.close')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/events/open/{id}', [App\Http\Controllers\EventController::class, 'open'])
+            ->name('events.open')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/events/edit/{id}', [App\Http\Controllers\EventController::class, 'edit'])
+            ->name('events.edit')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/events/update/{id}', [App\Http\Controllers\EventController::class, 'update'])
+            ->name('events.update')
+            ->middleware(['auth', 'isAdmin']);
+Route::delete('/events/delete/{id}', [App\Http\Controllers\EventController::class, 'delete'])
+            ->name('events.delete')
+            ->middleware(['auth', 'isAdmin']);
 Route::get('/events/{id}', [App\Http\Controllers\EventController::class, 'show'])
             ->name('events.show');
 
