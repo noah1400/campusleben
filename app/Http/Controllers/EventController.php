@@ -49,9 +49,10 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'preview_image' => 'image|mimes:jpg,png,jpeg,gif,svg|nullable|max:1999'
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'preview_image' => 'image|mimes:jpg,png,jpeg,gif,svg|nullable|max:1999',
+            'limit' => 'required|integer',
         ]);
 
         $event = new Event();
@@ -110,9 +111,10 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'preview_image' => 'image|nullable|max:1999'
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'preview_image' => 'image|nullable|max:1999',
+            'limit' => 'required|integer',
         ]);
         $event = Event::findOrFail($id);
         $event->name = $request->name;

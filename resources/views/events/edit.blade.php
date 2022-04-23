@@ -56,7 +56,7 @@
             </div>
             @csrf
             <div class="form-group mt-1">
-                <button name="submit" type="submit" class="btn btn-primary">Erstellen</button>
+                <button name="submit" type="submit" class="btn btn-primary">Speichern</button>
             </div>
             </form>
         </div>

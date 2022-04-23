@@ -14,7 +14,7 @@
                         <p>Ort: {{ $event->location }}</p>
                         <p>Start: {{ $event->start_date }}</p>
                         <p>Ende: {{ $event->end_date }}</p>
-                        <p>Beschreibung: <pre>{{ $event->description }}</pre></p>
+                        <p>Beschreibung: {{ $event->description }}</p>
                         @if($event->pre_registration_enabled)
                         <p>Voranmeldungen: {{ $event->users->count() }} Max.: {{ $event->limit == 0 ? 'unbegrenzt' : $event->limit}}</p>
                         <p><a href="{{ route('events.attendShow',['event'=>$event->id])}}" 
