@@ -7,7 +7,7 @@
             <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label> 
-                <input id="name" name="name" placeholder="z.B. Halloween Party" type="text" class="form-control @error('name') is-invalid @enderror">
+                <input id="name" name="name" placeholder="z.B. Halloween Party" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Beschreibung</label> 
-                <textarea id="description" name="description" cols="40" rows="5" class="form-control @error('description') is-invalid @enderror"></textarea>
+                <textarea id="description" name="description" cols="40" rows="5" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                 @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label for="location">Standort</label> 
-                <input id="location" name="location" placeholder="z.B. Café Einstein" type="text" class="form-control @error('location') is-invalid @enderror">
+                <input id="location" name="location" placeholder="z.B. Café Einstein" type="text" class="form-control @error('location') is-invalid @enderror" value="{{ old('location') }}">
                 @error('location')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="start_date">Startdatum</label> 
-                <input id="start_date" name="start_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('start_date') is-invalid @enderror">
+                <input id="start_date" name="start_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('start_date') is-invalid @enderror" value="{{ old('start_date') }}">
                 @error('start_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <label for="end_date">Enddatum</label> 
-                <input id="end_date" name="end_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('end_date') is-invalid @enderror">
+                <input id="end_date" name="end_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('end_date') is-invalid @enderror" value="{{ old('end_date') }}">
                 @error('end_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label for="limit">Max. Teilnehmer</label> 
-                <input id="limit" name="limit" placeholder="0" type="text" class="form-control @error('limit') is-invalid @enderror">
+                <input id="limit" name="limit" placeholder="0" type="text" class="form-control @error('limit') is-invalid @enderror" value="{{ old('email') }}">
                 @error('limit')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

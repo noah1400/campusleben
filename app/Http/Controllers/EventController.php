@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use \Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -15,8 +16,15 @@ class EventController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        $events = Event::all();
+        //get all events that are not expired
+        $events = Event::whereDate('end_date', '>=', Carbon::now())->get();
         return view('events.index', compact('events'));
+    }
+
+    public function archive(){
+        //get all events that are expired
+        $events = Event::whereDate('end_date', '<', Carbon::now())->get();
+        return view('events.archive', compact('events'));
     }
 
     /**
@@ -49,9 +57,9 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'preview_image' => 'image|mimes:jpg,png,jpeg,gif,svg|nullable|max:1999',
+            'start_date' => ['required','date','date_format:d.m.Y'],
+            'start_date' => ['required','date','date_format:d.m.Y'],
+            'end_date' => ['required','date','date_format:d.m.Y','after_or_equal:start_date'],
             'limit' => 'required|integer',
         ]);
 
@@ -59,8 +67,8 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->description = $request->description;
         $event->location = $request->location;
-        $event->start_date = $request->start_date;
-        $event->end_date = $request->end_date;
+        $event->start_date = Carbon::createFromFormat('d.m.Y', $request->start_date);
+        $event->end_date = Carbon::createFromFormat('d.m.Y', $request->end_date);
         if($request->has('pre_registration_enabled')){
             $event->pre_registration_enabled = true;
             if($request->has('team_registration_enabled')){
@@ -111,8 +119,8 @@ class EventController extends Controller
             'name' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'start_date' => ['required','date','date_format:d.m.Y'],
+            'end_date' => ['required','date','date_format:d.m.Y','after_or_equal:start_date'],
             'preview_image' => 'image|nullable|max:1999',
             'limit' => 'required|integer',
         ]);
@@ -120,8 +128,8 @@ class EventController extends Controller
         $event->name = $request->name;
         $event->description = $request->description;
         $event->location = $request->location;
-        $event->start_date = $request->start_date;
-        $event->end_date = $request->end_date;
+        $event->start_date = Carbon::createFromFormat('d.m.Y', $request->start_date);
+        $event->end_date = Carbon::createFromFormat('d.m.Y', $request->end_date);
         if($request->has('pre_registration_enabled')){
             $event->pre_registration_enabled = true;
             if($request->has('team_registration_enabled')){
@@ -196,6 +204,9 @@ class EventController extends Controller
      */
     public function show(int $id){
         $event = Event::findOrFail($id);
+        //Convert date to format d.m.Y
+        $event->start_date = Carbon::parse($event->start_date)->format('d.m.Y');
+        $event->end_date = Carbon::parse($event->end_date)->format('d.m.Y');
         return view('events.show', compact('event'));
     }
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->dateTime('end_date');
             $table->boolean('pre_registration_enabled')->default(true);
             $table->boolean('team_registration_enabled')->default(false);
+            $table->boolean('closed')->default(false);
             $table->integer('limit')->default(0);
             $table->string('preview_image')->nullable();
             $table->timestamps();

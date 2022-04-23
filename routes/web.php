@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', function(){return redirect()->route("welcome");})->name("home");
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
             ->name('events.index');
+Route::get('/events/archive', [App\Http\Controllers\EventController::class, 'archive'])
+            ->name('events.archive');
 Route::get('/events/me', [App\Http\Controllers\EventController::class, 'myevents'])
             ->name('events.myevents')
             ->middleware('auth');

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h2>Kommende Veranstaltungen</h2>
+            <h2>Vergangene Veranstaltungen</h2>
             <hr>
         </div>
         <div class="col-md-10">

@@ -48,6 +48,11 @@
                                 Events
                             </a>
                         </li>
+                        <li class="nav-item{{ Route::currentRouteName() == 'events.archive' ? ' active' : ''}}">
+                            <a class="nav-link" href="{{ route('events.archive') }}">
+                                Archiv
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,6 +77,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('events.myevents') }}">
+                                        Teilnahmen
+                                    </a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
