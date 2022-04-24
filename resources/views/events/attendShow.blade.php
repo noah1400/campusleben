@@ -22,7 +22,7 @@
                             <h3>{{ $event->name }}</h3>
                         </div>
                         <div class="card-body">
-                            @if ($event->pre_registration_enabled)
+                            @if ($event->pre_registration_enabled && $event->closed == false)
                                 @if ($event->users->count() >= $event->limit && $event->limit != 0)
                                     <p>Die maximale Teilnehmerzahl wurde erreicht.</p>
                                 @else
@@ -33,6 +33,9 @@
                                     <a href="{{ route('events.index') }}" class="btn btn-secondary">Nein</a>
                                 </form>
                                 @endif
+                            @elseif ($event->closed && $event->pre_registration_enabled == true)
+                                <p>Anmeldung abgelaufen</p>
+                                <a href="{{ route('events.index') }}" class="btn btn-secondary">Zurück</a>
                             @else
                                 <p>Für dieses Event ist die Vor-Anmeldung deaktiviert.</p>
                                 <a href="{{ route('events.index') }}" class="btn btn-secondary">Zurück</a>

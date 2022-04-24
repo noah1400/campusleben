@@ -213,7 +213,7 @@ class EventController extends Controller
     public function close(int $id)
     {
         $event = Event::findOrFail($id);
-        $event->pre_registration_enabled = false;
+        $event->closed = true;
         $event->save();
         return redirect()->route('events.show', ['id' => $id]);
     }
@@ -221,7 +221,7 @@ class EventController extends Controller
     public function open(int $id)
     {
         $event = Event::findOrFail($id);
-        $event->pre_registration_enabled = true;
+        $event->closed = false;
         $event->save();
         return redirect()->route('events.show', ['id' => $id]);
     }

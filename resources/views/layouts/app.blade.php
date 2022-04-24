@@ -53,6 +53,11 @@
                                 Archiv
                             </a>
                         </li>
+                        <li class="nav-item{{ Route::currentRouteName() == 'contact' ? ' active' : ''}}">
+                            <a class="nav-link" href="{{ route('contact') }}">
+                                Kontakt
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

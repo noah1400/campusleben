@@ -15,13 +15,15 @@
                             <p>Start: {{ $event->start_date }}</p>
                             <p>Ende: {{ $event->end_date }}</p>
                             <p>Beschreibung: {{ $event->description }}</p>
-                            @if($event->pre_registration_enabled)
+                            @if($event->pre_registration_enabled && $event->closed == false)
                             <p>Voranmeldungen: {{ $event->users->count() }} Max.: {{ $event->limit == 0 ? 'unbegrenzt' : $event->limit}}</p>
                             <p><a href="{{ route('events.attendShow',['event'=>$event->id])}}" class="btn btn-primary{{ $event->users->count() >= $event->limit && $event->limit != 0 ? ' disabled' : ''}}" {{ $event->users->count() >= $event->limit && $event->limit != 0 ? ' aria-disabled="true"' : ''}}>
                                     Anmelden
                                 </a></p>
+                            @elseif ($event->closed && $event->pre_registration_enabled)
+                            <p>Anmeldungen abgelaufen</p>
                             @else
-                            <p>Voranmeldungen: deaktiviert</p>
+                                <p>Voranmeldungen: deaktiviert</p>
                             @endif
                         </div>
                         <div class="col-md-6">
@@ -35,6 +37,23 @@
                                 Löschen
                             </button>
                             <a href="{{ route('events.edit', ['id'=>$event->id]) }}" class="btn btn-warning">Bearbeiten</a>
+                            @if ($event->pre_registration_enabled)
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    @if ($event->closed)
+                                    <form action="{{ route('events.open', ['id'=>$event->id]) }}" method="POST">
+                                        @csrf
+                                        <button href="{{ route('events.open', ['id'=>$event->id]) }}" class="btn btn-success">Event öffnen</button>
+                                    </form>
+                                    @else
+                                    <form action="{{ route('events.close', ['id'=>$event->id]) }}" method="POST">
+                                        @csrf
+                                        <button href="{{ route('events.close', ['id'=>$event->id]) }}" class="btn btn-info">Event schließen</button>
+                                    </form>
+                                    @endif
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <!-- Modal -->

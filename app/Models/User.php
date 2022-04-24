@@ -61,6 +61,6 @@ class User extends Authenticatable
      * @return bool
      */
     public function isAdmin() {
-        return in_array(auth()->user()->email, $this->admin_emails);
+        return auth()->user()->isAdmin;
     }
 }

@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', function(){return redirect()->route("welcome");})->name("home");
+Route::get('/contact', function(){return view('contact');})->name("contact");
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
             ->name('events.index');
 Route::get('/events/archive', [App\Http\Controllers\EventController::class, 'archive'])
@@ -67,5 +68,10 @@ Route::post('/user/data/delete', [App\Http\Controllers\UserController::class, 'd
             ->name('userdata.delete')
             ->middleware('auth');
 
-Route::get('/admin', function(){return "Admin";})->name("admin.index")->middleware(['auth', 'isAdmin']);
-
+Route::get('/admin', function(){return redirect()->route('admin.dashboard');})->middleware(['auth', 'isAdmin']);
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])
+            ->name('admin.dashboard')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUsers'])
+            ->name('admin.users')
+            ->middleware(['auth', 'isAdmin']);
