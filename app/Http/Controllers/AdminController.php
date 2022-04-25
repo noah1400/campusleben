@@ -81,6 +81,7 @@ class AdminController extends Controller
             'start_date' => ['required','date','date_format:d.m.Y'],
             'end_date' => ['required','date','date_format:d.m.Y','after_or_equal:start_date'],
             'limit' => 'required|integer',
+            'preview_image' => 'image|nullable',
         ]);
 
         $event = new Event();
