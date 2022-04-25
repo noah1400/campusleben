@@ -145,7 +145,7 @@ class AdminController extends Controller
             'location' => 'required',
             'start_date' => ['required','date','date_format:d.m.Y'],
             'end_date' => ['required','date','date_format:d.m.Y','after_or_equal:start_date'],
-            'preview_image' => 'image|nullable|max:1999',
+            'preview_image' => 'image|nullable',
             'limit' => 'required|integer',
         ]);
         $event = Event::findOrFail($id);
