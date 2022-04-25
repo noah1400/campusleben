@@ -1,10 +1,13 @@
-@extends("layouts.app")
+@extends('layouts.admin')
 
-@section("content")
-<div class="container">
+@section('content')
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Neue Veranstaltung</h1>
+</div>
+<div class="container mt-3 mb-3">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.events.store') }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name</label> 
                 <input id="name" name="name" placeholder="z.B. Halloween Party" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">

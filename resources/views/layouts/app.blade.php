@@ -86,6 +86,11 @@
                                         Teilnahmen
                                     </a>
                                     <div class="dropdown-divider"></div>
+                                    @admin
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        Admin Dashboard
+                                    </a>
+                                    @endadmin
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

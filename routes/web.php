@@ -33,10 +33,10 @@ Route::get('/events/attend/{event}', [App\Http\Controllers\EventController::clas
 Route::post('/events/attend/{event}', [App\Http\Controllers\EventController::class, 'attend'])
             ->name('events.attend')
             ->middleware('auth');
-Route::get('/events/create', [App\Http\Controllers\EventController::class, 'create'])
+Route::get('/events/create', function(){return redirect()->route("admin.events.create");})
             ->name('events.create')
             ->middleware(['auth', 'isAdmin']);
-Route::post('/events/create', [App\Http\Controllers\EventController::class, 'store'])
+Route::post('/events/create', function(){return redirect()->route("admin.events.store");})
             ->name('events.store')
             ->middleware(['auth', 'isAdmin']);
 Route::post('/events/close/{id}', [App\Http\Controllers\EventController::class, 'close'])
@@ -74,4 +74,13 @@ Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'da
             ->middleware(['auth', 'isAdmin']);
 Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUsers'])
             ->name('admin.users')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/events', [App\Http\Controllers\AdminController::class, 'showEvents'])
+            ->name('admin.events')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/events/create', [App\Http\Controllers\AdminController::class, 'createEvent'])
+            ->name('admin.events.create')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/admin/events/create', [App\Http\Controllers\AdminController::class, 'storeEvent'])
+            ->name('admin.events.store')
             ->middleware(['auth', 'isAdmin']);

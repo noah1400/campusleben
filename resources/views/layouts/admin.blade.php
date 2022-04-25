@@ -141,6 +141,18 @@
             border-color: transparent;
             box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
         }
+
+        @media only screen and (max-width: 768px) {
+            #admin-login-box {
+                margin-top: 0px;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            #admin-login-box {
+                margin-top: auto;
+            }
+        }
     </style>
 </head>
 
@@ -150,47 +162,36 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }} <span data-feather="log-out"></span></a>
-                    
-            </div>
-        </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
     </header>
 
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
+                <div class="position-sticky pt-3 d-flex flex-column align-items-start h-100">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">
+                            <a class="nav-link{{ Route::currentRouteName() == 'admin.dashboard' ? ' active' : ''}}" aria-current="page" href="{{ route('admin.dashboard') }}">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.users') }}">
+                            <a class="nav-link{{ Route::currentRouteName() == 'admin.users' ? ' active' : ''}}" href="{{ route('admin.users') }}">
                                 <span data-feather="users"></span>
                                 Benutzer
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link{{ Route::currentRouteName() == 'admin.events' ? ' active' : ''}}" href="{{route('admin.events')}}">
                                 <span data-feather="calendar"></span>
                                 Veranstaltungen
                             </a>
                         </li>
                     </ul>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <h6 class="w-100 sidebar-heading d-flex flex-row justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Backups</span>
-                        <a class="link-secondary" href="#" aria-label="Neues Backup">
+                        <a  class="link-secondary" href="#" aria-label="Neues Backup">
                             <span data-feather="plus-circle"></span>
                         </a>
                     </h6>
@@ -202,6 +203,18 @@
                             </a>
                         </li>
                     </ul>
+                    <div id="admin-login-box">
+                        <ul class="nav flex-column mb-2">
+                            <li class="nav-item">
+                                <a class="nav-link px-3" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }} <span data-feather="log-out"></span></a>   
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form> 
+                            </li>
+                        </ul>
+                    <div>
                 </div>
             </nav>
 
