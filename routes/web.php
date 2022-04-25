@@ -33,27 +33,6 @@ Route::get('/events/attend/{event}', [App\Http\Controllers\EventController::clas
 Route::post('/events/attend/{event}', [App\Http\Controllers\EventController::class, 'attend'])
             ->name('events.attend')
             ->middleware('auth');
-Route::get('/events/create', function(){return redirect()->route("admin.events.create");})
-            ->name('events.create')
-            ->middleware(['auth', 'isAdmin']);
-Route::post('/events/create', function(){return redirect()->route("admin.events.store");})
-            ->name('events.store')
-            ->middleware(['auth', 'isAdmin']);
-Route::post('/events/close/{id}', [App\Http\Controllers\EventController::class, 'close'])
-            ->name('events.close')
-            ->middleware(['auth', 'isAdmin']);
-Route::post('/events/open/{id}', [App\Http\Controllers\EventController::class, 'open'])
-            ->name('events.open')
-            ->middleware(['auth', 'isAdmin']);
-Route::get('/events/edit/{id}', [App\Http\Controllers\EventController::class, 'edit'])
-            ->name('events.edit')
-            ->middleware(['auth', 'isAdmin']);
-Route::post('/events/update/{id}', [App\Http\Controllers\EventController::class, 'update'])
-            ->name('events.update')
-            ->middleware(['auth', 'isAdmin']);
-Route::delete('/events/delete/{id}', [App\Http\Controllers\EventController::class, 'delete'])
-            ->name('events.delete')
-            ->middleware(['auth', 'isAdmin']);
 Route::get('/events/{id}', [App\Http\Controllers\EventController::class, 'show'])
             ->name('events.show');
 
@@ -83,4 +62,22 @@ Route::get('/admin/events/create', [App\Http\Controllers\AdminController::class,
             ->middleware(['auth', 'isAdmin']);
 Route::post('/admin/events/create', [App\Http\Controllers\AdminController::class, 'storeEvent'])
             ->name('admin.events.store')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/events/edit/{id}', [App\Http\Controllers\AdminController::class, 'editEvent'])
+            ->name('admin.events.edit')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/admin/events/update/{id}', [App\Http\Controllers\AdminController::class, 'updateEvent'])
+            ->name('admin.events.update')
+            ->middleware(['auth', 'isAdmin']);
+Route::delete('/admin/events/delete/{id}', [App\Http\Controllers\AdminController::class, 'deleteEvent'])
+            ->name('admin.events.delete')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/admin/events/close/{id}', [App\Http\Controllers\AdminController::class, 'closeEvent'])
+            ->name('admin.events.close')
+            ->middleware(['auth', 'isAdmin']);
+Route::post('/admin/events/open/{id}', [App\Http\Controllers\AdminController::class, 'openEvent'])
+            ->name('admin.events.open')
+            ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/events/{id}', [App\Http\Controllers\AdminController::class, 'showEvent'])
+            ->name('admin.events.show')
             ->middleware(['auth', 'isAdmin']);

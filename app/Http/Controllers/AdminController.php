@@ -30,7 +30,7 @@ class AdminController extends Controller
             if ($users->count() == 0) {
                 $title = 'Diese Event hat keine Teilnehmer';
             }else{
-                $title = 'Teilnehmer von Event: ' . Event::find(request('event'))->name;
+                $title = 'Teilnehmer von Event: ' . Event::findOrFail(request('event'))->name;
             }
         } else {
             $users = User::orderBy('id')->paginate(50);
@@ -53,7 +53,7 @@ class AdminController extends Controller
             if ($events->count() == 0) {
                 $title = 'Dieser Benutzer hat keine Events';
             }else{
-                $title = 'Events von Benutzer: ' . User::find(request('user'))->name;
+                $title = 'Events von Benutzer: ' . User::findOrFail(request('user'))->name;
             }
         } else {
             $events = Event::orderBy('id')->paginate(50);
@@ -127,5 +127,112 @@ class AdminController extends Controller
         $event->save();
 
         return redirect()->route('admin.events');
+    }
+
+    // Show form to edit event
+    public function editEvent($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('admin.events.edit', compact('event'));
+    }
+
+    // Update event
+    public function updateEvent(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'start_date' => ['required','date','date_format:d.m.Y'],
+            'end_date' => ['required','date','date_format:d.m.Y','after_or_equal:start_date'],
+            'preview_image' => 'image|nullable|max:1999',
+            'limit' => 'required|integer',
+        ]);
+        $event = Event::findOrFail($id);
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->location = $request->location;
+        $event->start_date = Carbon::createFromFormat('d.m.Y', $request->start_date);
+        $event->end_date = Carbon::createFromFormat('d.m.Y', $request->end_date);
+        if($request->has('pre_registration_enabled')){
+            $event->pre_registration_enabled = true;
+            if($request->has('team_registration_enabled')){
+                $event->team_registration_enabled = true;
+            }else{
+                $event->team_registration_enabled = false;
+            }
+        }else{
+            $event->pre_registration_enabled = false;
+            $event->team_registration_enabled = false;
+        }
+        if($request->has('limit')){
+            if($request->limit > 0){
+                $event->limit = $request->limit;
+            }else{
+                $event->limit = 0;
+            }
+        }
+
+        if (request()->hasFile('preview_image')) {
+            $imageURL = request()->file('preview_image')->store('public/events');
+
+            $parameters['image_url'] = substr($imageURL, 7);
+
+            Image::configure(array('driver' => 'gd'));
+
+            Image::make(storage_path('app/public/' . $parameters['image_url']))
+                ->heighten(300)
+                ->save(storage_path('app/public/' . $parameters['image_url']));
+
+            $previousImage = $event->preview_image;
+            //delete previous image
+            if($previousImage != null){
+                if(file_exists(storage_path('app/public/' . $previousImage))){
+                    unlink(storage_path('app/public/' . $previousImage));
+                }
+            }
+
+            $event->preview_image = $parameters['image_url'];
+
+        }
+
+
+
+        $event->save();
+
+        return redirect()->route('admin.events');
+    }
+
+    // Delete event
+    public function deleteEvent($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->delete();
+        return redirect()->route('admin.events');
+    }
+
+    // Close event
+    public function closeEvent($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->closed = true;
+        $event->save();
+        return redirect()->route('admin.events');
+    }
+
+    // Open event
+    public function openEvent($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->closed = false;
+        $event->save();
+        return redirect()->route('admin.events');
+    }
+
+    // Show event
+    public function showEvent($id)
+    {
+        $event = Event::findOrFail($id);
+        return view('admin.events.show', compact('event'));
     }
 }
