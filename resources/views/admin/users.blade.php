@@ -6,6 +6,11 @@
 </div>
 <h2>{{ $title }}</h2>
 {{ $users->onEachSide(5)->links() }}
+@if ($event != null)
+    <a class="btn btn-primary" href="{{ route('admin.users.toPdf', $users) }}?event={{ $event }}">Exportieren</a>
+@else
+    <a class="btn btn-primary" href="{{ route('admin.users.toPdf', $users) }}">Exportieren</a>
+@endif
 <div class="table-responsive">
        <table class="table table-striped table-sm">
            <thead>
@@ -20,7 +25,11 @@
                 @foreach($users as $user)
                 <tr>
                     <th scope="row">{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{{ route('admin.events') }}?user={{ $user->id }}">
+                            {{ $user->name }}
+                        </a>
+                    </td>
                     <td>{{ $user->email }}</td>
                     <td>
                         @if($user->isAdmin)

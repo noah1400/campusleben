@@ -20,6 +20,15 @@
                             <img src="{{ asset('storage/' . $event->preview_image) }}" alt="{{ $event->name }}" class="img-fluid">
                         </div>
                     </div>
+                    @if ($event->limit != 0)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ $event->users->count()/$event->limit*100 }}%" aria-valuenow="{{ $event->users->count() }}" aria-valuemin="0" aria-valuemax="{{ $event->limit }}">{{ $event->users->count()/$event->limit*100 }}%</div>
+                            </div>    
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
