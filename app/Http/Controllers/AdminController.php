@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Carbon\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -23,7 +24,8 @@ class AdminController extends Controller
     // Show all users
     public function showUsers()
     {
-        if(request('event', null) != null) {
+        $event = request('event', null);
+        if($event != null) {
             $users = User::whereHas('events', function($query) {
                 $query->where('id', request('event'));
             })->paginate(50);
@@ -38,7 +40,7 @@ class AdminController extends Controller
         }
         $user_count = User::count();
         $events = Event::all();
-        return view('admin.users', compact('users', 'events', 'user_count', 'title'));
+        return view('admin.users', compact('users', 'events', 'user_count', 'title', 'event'));
     }
 
     // Event functions
@@ -234,6 +236,21 @@ class AdminController extends Controller
     public function showEvent($id)
     {
         $event = Event::findOrFail($id);
-        return view('admin.events.show', compact('event'));
+        $users = $event->users();
+        $users_count = $event->users()->count();
+        return view('admin.events.show', compact('event', 'users_count'));
+    }
+
+
+    // Create pdf of users
+    public function createPdf() {
+        if(request('event', null) != null) {
+            $event = Event::find(request('event'));
+            $users = $event->users();
+        } else {
+            $users = User::orderBy('id');
+        }
+        $pdf = PDF::loadView('admin.users.pdf', compact('users'));
+        return $pdf->download('users.pdf');
     }
 }

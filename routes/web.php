@@ -54,6 +54,9 @@ Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'da
 Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUsers'])
             ->name('admin.users')
             ->middleware(['auth', 'isAdmin']);
+Route::get('/admin/users/toPdf', [App\Http\Controllers\AdminController::class, 'createPdf'])
+            ->name('admin.users.toPdf')
+            ->middleware(['auth', 'isAdmin']);
 Route::get('/admin/events', [App\Http\Controllers\AdminController::class, 'showEvents'])
             ->name('admin.events')
             ->middleware(['auth', 'isAdmin']);
