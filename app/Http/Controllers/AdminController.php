@@ -210,6 +210,8 @@ class AdminController extends Controller
     public function deleteEvent($id)
     {
         $event = Event::findOrFail($id);
+        // detach all users from event
+        $event->users()->detach();
         $event->delete();
         return redirect()->route('admin.events');
     }
