@@ -5,7 +5,7 @@
     <h1 class="h2">Benutzer</h1>
 </div>
 <h2>{{ $title }}</h2>
-{{ $users->onEachSide(5)->links() }}
+{{ $users->onEachSide(2)->links() }}
 @if ($event != null)
     <a class="btn btn-primary" href="{{ route('admin.users.toPdf', $users) }}?event={{ $event }}">Exportieren</a>
 @else
