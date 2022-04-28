@@ -28,14 +28,14 @@ class AdminController extends Controller
         if($event != null) {
             $users = User::whereHas('events', function($query) {
                 $query->where('id', request('event'));
-            })->paginate(50);
+            })->orderBy('isAdmin','desc')->paginate(50);
             if ($users->count() == 0) {
                 $title = 'Diese Event hat keine Teilnehmer';
             }else{
                 $title = 'Teilnehmer von Event: ' . Event::findOrFail(request('event'))->name;
             }
         } else {
-            $users = User::orderBy('id')->paginate(50);
+            $users = User::orderBy('isAdmin','desc')->orderBy('id')->paginate(50);
             $title = 'Alle Teilnehmer';
         }
         $user_count = User::count();
