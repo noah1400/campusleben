@@ -37,6 +37,9 @@ Route::get('/events/{id}', [App\Http\Controllers\EventController::class, 'show']
             ->name('events.show');
 
 
+Route::get('/comments/{event}', [App\Http\Controllers\CommentController::class, 'getComments'])
+            ->name('events.comments');
+
 Route::get('/user/data/show', [App\Http\Controllers\UserController::class, 'showdata'])
             ->name('userdata.showdata')
             ->middleware('auth');

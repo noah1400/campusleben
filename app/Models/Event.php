@@ -19,4 +19,13 @@ class Event extends Model
         return $this->belongsToMany(User::class);
     }
 
+    /**
+     * Gets all the comments that are written about this event.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }

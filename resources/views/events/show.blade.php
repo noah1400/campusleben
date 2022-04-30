@@ -22,12 +22,60 @@
                                 </a></p>
                             @elseif ($event->closed && $event->pre_registration_enabled)
                             <p>Anmeldungen abgelaufen</p>
-                            @else
-                                <p>Voranmeldungen: deaktiviert</p>
                             @endif
                         </div>
                         <div class="col-md-6">
                             <img src="{{ asset('storage/' . $event->preview_image) }}" alt="{{ $event->name }}" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if($event->comments()->count() > 0)
+                            <h5>Kommentare ({{ $event->comments()->count()}})</h5>
+                            <div class="container">
+                                <div id="comments">
+
+                                </div>
+                                <div class="auto-load text-center">
+                                    <button class="btn btn-primary" onclick="clickLoadMore()" id="load-more">Mehr Kommentare laden</button>
+                                </div>
+                            </div>
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script>
+                                var ENDPOINT = "{{ route('events.comments', ['event' => $event->id]) }}";
+                                var PAGE = 1;
+                                loadMore(PAGE);
+
+                                function clickLoadMore() {
+                                    PAGE++;
+                                    loadMore(PAGE);
+                                }
+
+                                function loadMore(page) {
+                                    $.ajax({
+                                            url: ENDPOINT + '?page=' + page,
+                                            datatype: "html",
+                                            type: "get",
+                                            beforeSend: function() {
+                                                $("#load-more").html("Lade...");
+                                            }
+                                        })
+                                        .done(function(response) {
+                                            if (response.length == 0) {
+                                                $("#load-more").html("Keine weiteren Kommentare");
+                                                return;
+                                            }
+                                            $("#load-more").html("Mehr Kommentare laden");
+                                            $("#comments").append(response);
+                                        })
+                                        .fail(function(jqXHR, ajaxOptions, thrownError) {
+                                            console.log("Error: " + jqXHR.status + " " + thrownError);
+                                        })
+                                }
+                            </script>
+                            @else
+                            <p>Keine Kommentare</p>
+                            @endif
                         </div>
                     </div>
                 </div>
