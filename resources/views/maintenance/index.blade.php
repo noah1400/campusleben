@@ -1,3 +1,9 @@
+@php
+    $result = array_values(preg_grep('/(--refresh)/', array_values( $_SERVER['argv'] ) ));
+    if(!empty($result)){
+      $refresh = substr($result[0], strpos($result[0], "=") + 1);
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 
     <title>{{ config('app.name', 'CampusLeben') }}</title>
+
+    @if(isset($refresh))
+    <meta http-equiv="refresh" content="{{$refresh}}">
+    @endif
 
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
