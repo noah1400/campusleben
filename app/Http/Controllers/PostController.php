@@ -34,7 +34,7 @@ class PostController extends Controller
         $post->save();
 
 
-        return redirect()->route('events.show', ['event' => $post->event_id]);
+        return redirect()->route('events.show', ['id' => $post->event_id]);
     }
     
     public function getPosts(Request $request, $event)
@@ -56,12 +56,13 @@ class PostController extends Controller
         $array = array_chunk($postsArray, 3, true);
         foreach ($array as $column)
         {   
-            $posts .= '<div class="row">';
+            $posts .= '<div class="row mb-2">';
             foreach ($column as $post)
             {
-                $posts .= '<div class="col-md-4">';
-                $posts .= '<div style="width:33.3%">';
-                $posts .= '<img src="' . asset('storage/' . $post['picture']) . '"></img>';
+                $posts .= '<div class="col-4">';
+                $posts .= '<div class="postImageOuter">';
+                $posts .= '<img class="w-100" src="' . asset('storage/' . $post['picture']) . '"></img>';
+                $posts .= '<div class="postOverlay"></div>';
                 $posts .= '</div>';
                 $posts .= '</div>';
             }

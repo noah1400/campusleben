@@ -71,7 +71,8 @@
                         </form>
                     </div>
                     @endadmin
-                    <div class="row">
+                    <hr>
+                    <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="container">
                                 <div id="posts">
