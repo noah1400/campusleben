@@ -20,12 +20,12 @@ class Event extends Model
     }
 
     /**
-     * Gets all the comments that are written about this event.
+     * Gets all the posts that are related to this event.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
+     **/
+    public function posts()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Post::class);
     }
 
 }

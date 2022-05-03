@@ -15,7 +15,7 @@ class Comment extends Model
     }
 
     // event
-    public function event() {
-        return $this->belongsTo(Event::class);
+    public function post() {
+        return $this->belongsTo(Post::class);
     }
 }
