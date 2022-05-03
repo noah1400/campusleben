@@ -56,10 +56,10 @@ class PostController extends Controller
         $array = array_chunk($postsArray, 3, true);
         foreach ($array as $column)
         {   
-            $posts .= '<div class="row mb-2">';
+            $posts .= '<div class="row">';
             foreach ($column as $post)
             {
-                $posts .= '<div class="col-4">';
+                $posts .= '<div class="col-md-4 p-2">';
                 $posts .= '<div class="postImageOuter">';
                 $posts .= '<img class="w-100" src="' . asset('storage/' . $post['picture']) . '"></img>';
                 $posts .= '<div class="postOverlay"></div>';
