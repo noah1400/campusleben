@@ -54,14 +54,6 @@ class User extends Authenticatable
     public function events() {
         return $this->belongsToMany(Event::class);
     }
-
-    /**
-     * Gets the comments that this user has written.
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    */
-    public function comments() {
-        return $this->hasMany(Comment::class);
-    }
     /**
      * Checks if authenticated user is admin
      * 

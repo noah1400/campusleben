@@ -3,10 +3,15 @@
 @section("head")
 <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 <script src="{{ asset('js/popups.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 @endsection
 
 @section("body")
 <div id="overlay" class="overlay"></div>
+@endsection
+
+@section("footer")
+
 @endsection
 
 @section("content")
@@ -71,6 +76,7 @@
                         </form>
                     </div>
                     @endadmin
+                    @if($event->posts->count() > 0)
                     <hr>
                     <div class="row mt-3">
                         <div class="col-md-12">
@@ -107,15 +113,18 @@
                                 })
                                 .done(function(response) {
                                     if (response.length == 0) {
+                                        PAGE--;
                                         return;
                                     }
                                     $("#posts").append(response);
+                                    feather.replace();
                                 })
                                 .fail(function(jqXHR, ajaxOptions, thrownError) {
                                     console.log("Error: " + jqXHR.status + " " + thrownError);
                                 });
                         }
                     </script>
+                    @endif
                 </div>
             </div>
         </div>

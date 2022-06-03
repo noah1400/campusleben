@@ -8,4 +8,5 @@ jQuery(function () {
         $("#overlay").css("visibility", "hidden");
         $("#newPostForm").css("visibility", "hidden");
     })
+
 })

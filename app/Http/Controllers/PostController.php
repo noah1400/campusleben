@@ -45,13 +45,7 @@ class PostController extends Controller
         $posts = '';
         $postsArray = [];
         foreach($results as $pos){
-            $postsArray[] = [
-                'id' => $pos->id,
-                'subtitle' => $pos->subtitle,
-                'picture' => $pos->picture,
-                'created_at' => $pos->created_at,
-                'event_id' => $pos->event_id,
-            ];
+            $postsArray[] = $pos;
         }
         $array = array_chunk($postsArray, 3, true);
         foreach ($array as $column)
@@ -59,10 +53,11 @@ class PostController extends Controller
             $posts .= '<div class="row">';
             foreach ($column as $post)
             {
-                $posts .= '<div class="col-md-4 p-2">';
+                $posts .= '<div class="col-md-4 p-2 postPreview">';
                 $posts .= '<div class="postImageOuter">';
-                $posts .= '<img class="w-100" src="' . asset('storage/' . $post['picture']) . '"></img>';
-                $posts .= '<div class="postOverlay"></div>';
+                $posts .= '<img class="w-100" src="' . asset('storage/' . $post->picture) . '"></img>';
+                $posts .= '<div class="postOverlay">';
+                $posts .= '</div>';
                 $posts .= '</div>';
                 $posts .= '</div>';
             }
