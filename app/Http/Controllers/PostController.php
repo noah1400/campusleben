@@ -14,7 +14,7 @@ class PostController extends Controller
         $this->validate($request, [
             'subtitle' => 'nullable|string|max:255',
             'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'event_id' => 'required|integer',
+            'event_id' => 'required|string',
         ]);
         $post = new Post;
         $post->subtitle = $request->subtitle;

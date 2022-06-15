@@ -85,7 +85,7 @@
                                     <img src="{{ asset('storage/' . $post->picture) }}" alt="{{ $post->id }}"
                                         class="img-fluid w-100">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 text-center">
                                     <p>{{ $post->subtitle}}</p>
                                 </div>
                             </div>
