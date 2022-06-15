@@ -65,6 +65,11 @@
                                 Kontakt
                             </a>
                         </li>
+                        <li class="nav-item{{ Route::currentRouteName() == 'impressum' ? ' active' : ''}}">
+                            <a class="nav-link" href="{{ route('impressum') }}">
+                                Impressum
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
