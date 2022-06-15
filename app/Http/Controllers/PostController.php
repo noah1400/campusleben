@@ -53,12 +53,15 @@ class PostController extends Controller
             $posts .= '<div class="row">';
             foreach ($column as $post)
             {
+                $r = route('events.show', ['id' => $post->event->id]);
                 $posts .= '<div class="col-md-4 p-2 postPreview">';
+                $posts .= '<a href="'.$r.'?p='.$post->id.'">';
                 $posts .= '<div class="postImageOuter">';
                 $posts .= '<img class="w-100" src="' . asset('storage/' . $post->picture) . '"></img>';
                 $posts .= '<div class="postOverlay">';
                 $posts .= '</div>';
                 $posts .= '</div>';
+                $posts .= '</a>';
                 $posts .= '</div>';
             }
             $posts .= '</div>';

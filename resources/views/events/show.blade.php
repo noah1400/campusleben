@@ -76,6 +76,21 @@
                         </form>
                     </div>
                     @endadmin
+
+                    @if($post != null)
+                    <div class="showPostOverlay"></div>
+                        <div id="showPostPopup" class="showPostPopup">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{{ asset('storage/' . $post->picture) }}" alt="{{ $post->id }}"
+                                        class="img-fluid w-100">
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ $post->subtitle}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     @if($event->posts->count() > 0)
                     <hr>
                     <div class="row mt-3">

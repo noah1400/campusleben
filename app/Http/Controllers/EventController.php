@@ -137,7 +137,17 @@ class EventController extends Controller
         //Convert date to format d.m.Y
         $event->start_date = Carbon::parse($event->start_date)->format('d.m.Y');
         $event->end_date = Carbon::parse($event->end_date)->format('d.m.Y');
-        return view('events.show', compact('event'));
+
+        if (request()->has('p'))
+        {
+            $post = $event->posts()->where('id', request('p'))->first();
+        }
+        else
+        {
+            $post = null;
+        }
+
+        return view('events.show', compact('event', 'post'));
     }
 
     public function close(int $id)
