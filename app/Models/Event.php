@@ -9,6 +9,7 @@ class Event extends Model
 {
     use HasFactory;
 
+    use Concerns\UsesUuid;
     /**
      * Gets alle the users that are attending this event.
      * 

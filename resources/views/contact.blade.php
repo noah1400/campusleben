@@ -14,6 +14,10 @@
                     <a class="h4 text-decoration-none" href="https://www.instagram.com/campus_leben/" target="_blank">@campus_leben</a>
                 </div>
                 <div class="col-md-12">
+                    <span data-feather="instagram"></span>
+                    <a class="h4 text-decoration-none pt-5" href="https://www.instagram.com/cafeeinsteinhs/" target="_blank">@cafeeinsteinhs</a>
+                </div>
+                <div class="col-md-12">
                     <h3 class="pt-3 pb-2">Discord</h2>
                     <iframe src="https://discord.com/widget?id=953312705513680967&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                 </div>
