@@ -14,7 +14,7 @@ class PostController extends Controller
         $this->validate($request, [
             'subtitle' => 'nullable|string|max:255',
             'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'event_id' => 'required|integer',
+            'event_id' => 'required|string',
         ]);
         $post = new Post;
         $post->subtitle = $request->subtitle;
@@ -53,12 +53,15 @@ class PostController extends Controller
             $posts .= '<div class="row">';
             foreach ($column as $post)
             {
+                $r = route('events.show', ['id' => $post->event->id]);
                 $posts .= '<div class="col-md-4 p-2 postPreview">';
+                $posts .= '<a href="'.$r.'?p='.$post->id.'">';
                 $posts .= '<div class="postImageOuter">';
                 $posts .= '<img class="w-100" src="' . asset('storage/' . $post->picture) . '"></img>';
                 $posts .= '<div class="postOverlay">';
                 $posts .= '</div>';
                 $posts .= '</div>';
+                $posts .= '</a>';
                 $posts .= '</div>';
             }
             $posts .= '</div>';

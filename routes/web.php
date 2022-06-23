@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', function(){return redirect()->route("welcome");})->name("home");
 Route::get('/contact', function(){return view('contact');})->name("contact");
+Route::get('/impressum', function(){return view('impressum');})->name("impressum");
+
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
             ->name('events.index');
 Route::get('/events/archive', [App\Http\Controllers\EventController::class, 'archive'])

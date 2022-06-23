@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="start_date">Startdatum</label> 
-                <input id="start_date" name="start_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('start_date') is-invalid @enderror" value="{{ old('start_date') }}">
+                <input id="start_date" name="start_date" placeholder="tt.mm.jjjj" type="text" class="form-control @error('start_date') is-invalid @enderror" value="{{ old('start_date') }}">
                 @error('start_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="end_date">Enddatum</label> 
-                <input id="end_date" name="end_date" placeholder="tt/mm/jjjj" type="text" class="form-control @error('end_date') is-invalid @enderror" value="{{ old('end_date') }}">
+                <input id="end_date" name="end_date" placeholder="tt.mm.jjjj" type="text" class="form-control @error('end_date') is-invalid @enderror" value="{{ old('end_date') }}">
                 @error('end_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

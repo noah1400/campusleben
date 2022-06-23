@@ -26,12 +26,12 @@
             </div>
             <div class="form-group">
                 <label for="start_date">Startdatum</label> 
-                <input id="start_date" name="start_date" placeholder="tt/mm/jjjj" type="text" class="form-control" required="required"
+                <input id="start_date" name="start_date" placeholder="tt.mm.jjjj" type="text" class="form-control" required="required"
                         value="{{ \Carbon\Carbon::parse($event->start_date)->format('d.m.Y') }}">
             </div>
             <div class="form-group">
                 <label for="end_date">Enddatum</label> 
-                <input id="end_date" name="end_date" placeholder="tt/mm/jjjj" type="text" class="form-control" required="required"
+                <input id="end_date" name="end_date" placeholder="tt.mm.jjjj" type="text" class="form-control" required="required"
                         value="{{ \Carbon\Carbon::parse($event->start_date)->format('d.m.Y') }}">
             </div>
             <div class="form-group">

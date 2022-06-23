@@ -109,7 +109,7 @@ class EventController extends Controller
         return redirect()->route('events.show', $event->id);
     }
 
-    public function attend(Request $request, int $id)
+    public function attend(Request $request, $id)
     {
         $user = auth()->user();
         if ($user->events->contains($id)){
@@ -120,7 +120,7 @@ class EventController extends Controller
         return redirect()->route('events.myevents');
     }
 
-    public function attendShow(int $id)
+    public function attendShow($id)
     {
         $event = Event::findOrFail($id);
         return view('events.attendShow', compact('event'));
@@ -132,15 +132,25 @@ class EventController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(int $id){
+    public function show($id){
         $event = Event::findOrFail($id);
         //Convert date to format d.m.Y
         $event->start_date = Carbon::parse($event->start_date)->format('d.m.Y');
         $event->end_date = Carbon::parse($event->end_date)->format('d.m.Y');
-        return view('events.show', compact('event'));
+
+        if (request()->has('p'))
+        {
+            $post = $event->posts()->where('id', request('p'))->first();
+        }
+        else
+        {
+            $post = null;
+        }
+
+        return view('events.show', compact('event', 'post'));
     }
 
-    public function close(int $id)
+    public function close($id)
     {
         $event = Event::findOrFail($id);
         $event->closed = true;
@@ -148,7 +158,7 @@ class EventController extends Controller
         return redirect()->route('events.show', ['id' => $id]);
     }
 
-    public function open(int $id)
+    public function open($id)
     {
         $event = Event::findOrFail($id);
         $event->closed = false;
@@ -156,7 +166,7 @@ class EventController extends Controller
         return redirect()->route('events.show', ['id' => $id]);
     }
 
-    public function delete(int $id){
+    public function delete($id){
         $event = Event::findOrFail($id);
         $event->delete();
         return redirect()->route('events.index');

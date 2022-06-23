@@ -17,11 +17,11 @@
             </thead>
             <tbody>
                 @foreach($users as $data)
-                <tr style="border-bottom:0.5px solid grey">
+                <tr style="">
                     <th>{{ $data->id }}</th>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->email }}</td>
-                    <td style="border:1px solid black"></td>
+                    <td style=""></td>
                 </tr>
                 @endforeach
             </tbody>
