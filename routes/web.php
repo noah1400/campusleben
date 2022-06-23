@@ -41,9 +41,6 @@ Route::post('/posts/newpost', [App\Http\Controllers\PostController::class, 'newP
             ->name('posts.newpost')
             ->middleware(['auth', 'isAdmin']);
 
-// ajax routes
-Route::get('/comments/{event}', [App\Http\Controllers\CommentController::class, 'getComments'])
-            ->name('events.comments');
 Route::get('/posts/{event}', [App\Http\Controllers\PostController::class, 'getPosts'])
             ->name('events.posts');
 
