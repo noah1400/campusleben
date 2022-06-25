@@ -2,11 +2,10 @@
 <html lang="de">
 <head>
 </head>
-<body>
+<body style="text-align: center">
     <!-- Table of all users -->
     <div style="width: 100%">
-    {{ $users->count() }}
-        <table class="table table-bordered mb-5">
+        <table style="width: 100%">
             <thead style="border-bottom:1px solid black">
                 <tr class="table-danger">
                     <th scope="col">#</th>
@@ -16,12 +15,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $data)
-                <tr style="">
-                    <th>{{ $data->id }}</th>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->email }}</td>
-                    <td style=""></td>
+                @foreach($data as $u)
+                <tr style="text-align: center; border-bottom: 1px solid black; padding: 2px">
+                    <th>{{ $u['index'] }}</th>
+                    <td>{{ $u['name'] }}</td>
+                    <td>{{ $u['email'] }}</td>
+                    <td style="border: 1px solid black"></td>
                 </tr>
                 @endforeach
             </tbody>

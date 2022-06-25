@@ -250,9 +250,28 @@ class AdminController extends Controller
             $event = Event::find(request('event'));
             $users = $event->users();
         } else {
-            $users = User::orderBy('id');
+            $users = User::all();
         }
-        $pdf = PDF::loadView('admin.users.pdf', compact('users'));
+        $data = [];
+        $i = 0;
+        foreach($users as $user) {
+            $data[] = [
+                'index' => $i,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'address' => $user->address,
+                'city' => $user->city,
+                'zip' => $user->zip,
+                'country' => $user->country,
+                'birthday' => $user->birthday,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+            ];
+            $i++;
+        }
+        $pdf = PDF::loadView('admin.users.pdf', compact('data'));
         return $pdf->download('users.pdf');
     }
 }
