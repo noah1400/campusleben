@@ -9,6 +9,18 @@
                 <hr>
             </div>
             <div class="row">
+            <p>CampusLeben ev. <br>
+                    Kanalstraße 33<br>
+                    73728 Esslingen am Neckar <br>
+                </p>
+                <p> <strong>Vertreten durch: </strong><br>
+                    Tristan Eberhardt (zweiter Vorstand)<br>
+                </p>
+                <p><strong>Kontakt:</strong> <br>
+                    Telefon: 0711 397-3498<br>
+                    E-Mail: <a href='mailto:campusleben@hs-esslingen.de'>campusleben@hs-esslingen.de</a></br></p>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <span data-feather="instagram"></span>
                     <a class="h4 text-decoration-none" href="https://www.instagram.com/campus_leben/" target="_blank">@campus_leben</a>
@@ -19,7 +31,7 @@
                 </div>
                 <div class="col-md-12">
                     <h3 class="pt-3 pb-2">Discord</h2>
-                    <iframe src="https://discord.com/widget?id=953312705513680967&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                        <iframe src="https://discord.com/widget?id=953312705513680967&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                 </div>
             </div>
         </div>
