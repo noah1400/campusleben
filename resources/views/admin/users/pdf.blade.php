@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body style="text-align: center">
     <!-- Table of all users -->
@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 @foreach($data as $u)
-                <tr style="text-align: center; border-bottom: 1px solid black; padding: 2px">
+                <tr style="text-align: center; {{ ($u['index']%2==0)?'background-color: #ebedef':'background-color: #f8fafc' }}">
                     <th>{{ $u['index'] }}</th>
                     <td>{{ $u['name'] }}</td>
                     <td>{{ $u['email'] }}</td>
