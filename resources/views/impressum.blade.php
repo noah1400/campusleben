@@ -12,7 +12,7 @@
                     73728 Esslingen am Neckar <br>
                 </p>
                 <p> <strong>Vertreten durch: </strong><br>
-                    Tristan Eberhardt (zweiter Vorstand)<br>
+                    Tristan Eberhardt (zweiter Vorsitzender)<br>
                 </p>
                 <p><strong>Kontakt:</strong> <br>
                     Telefon: 0711 397-3498<br>
@@ -25,6 +25,9 @@
                 </p>
                 <p><strong>Aufsichtsbehörde:</strong><br>
                     Amtsgericht Stuttgart<br></p>
+                <p><strong>Genderhinweis:</strong><br>
+                    Aus Gründen der besseren Lesbarkeit wird auf die gleichzeitige Verwendung der Sprachformen männlich,
+                    weiblich und divers (m/w/d) verzichtet. Sämtliche Personenbezeichnungen gelten gleichermaßen für alle Geschlechter.<br></p>
                 <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung für Inhalte</strong><br><br>
                     Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
                     Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als
