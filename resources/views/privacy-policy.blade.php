@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <h1>Datenschutzerklärung</h1>
             <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
-            <p>Tristan Eberhardt (zweiter Vorstand)</p>
+            <p>Tristan Eberhardt (zweiter Vorsitzender)</p>
             <h2>Ihre Betroffenenrechte</h2>
             <p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
             <ul>
