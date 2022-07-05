@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Event extends Model
+
+class Event extends Model implements Sitemapable
 {
     use HasFactory;
 
@@ -27,6 +30,11 @@ class Event extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function toSitemapTag(): Url | string | array
+    {
+        return route('events.show', $this->id);
     }
 
 }

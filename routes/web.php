@@ -23,6 +23,7 @@ Route::get('/home', function(){return redirect()->route("welcome");})->name("hom
 Route::get('/contact', function(){return view('contact');})->name("contact");
 Route::get('/impressum', function(){return view('impressum');})->name("impressum");
 Route::get('/datenschutz', function(){return view('privacy-policy');})->name("datenschutz");
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapXmlController::class, 'index'])->name("sitemap");
 
 Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])
             ->name('events.index');
